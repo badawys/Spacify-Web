@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['domain' => 'broccli.co', 'middleware' => 'web'], function () {
     /**
      * Switch between the included languages
      */
@@ -23,7 +23,7 @@ Route::group(['middleware' => 'web'], function () {
  * Namespaces indicate folder structure
  * Admin middleware groups web, auth, and routeNeedsPermission
  */
-Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
+Route::group(['domain' => 'backend.broccli.co', 'namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
     /**
      * These routes need view-backend permission
      * (good if you want to allow more than one group in the backend,
