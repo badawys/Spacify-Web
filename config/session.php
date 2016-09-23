@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'encrypt' => false,
+    'encrypt' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +117,7 @@ return [
      * site based on the frameworks it's built on.
      */
 
-    'cookie' => 'lvapp_session',
+    'cookie' => 'broccli_session',
 
     /*
     |--------------------------------------------------------------------------
