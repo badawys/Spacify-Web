@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Frontend Routes
+ */
 Route::group(['domain' => env('APP_DOMAIN_FRONTEND'), 'middleware' => 'web'], function () {
     /**
      * Switch between the included languages
@@ -20,10 +23,8 @@ Route::group(['domain' => env('APP_DOMAIN_FRONTEND'), 'middleware' => 'web'], fu
 
 /**
  * Backend Routes
- * Namespaces indicate folder structure
- * Admin middleware groups web, auth, and routeNeedsPermission
  */
-Route::group(['domain' => env('APP_DOMAIN_BACKEND'), 'namespace' => 'Backend'], function () {
+Route::group(['domain' => env('APP_DOMAIN_BACKEND'), 'middleware' => 'web'], function () {
 
     /**
      * Redirect to the login page if not loged in
@@ -34,7 +35,19 @@ Route::group(['domain' => env('APP_DOMAIN_BACKEND'), 'namespace' => 'Backend'], 
         });
     });
 
-    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+    /**
+     * Switch between the included languages
+     */
+    Route::group(['namespace' => 'Language'], function () {
+        require(__DIR__ . '/Language/Language.php');
+    });
+
+    /**
+     * Backend Routes
+     * Namespaces indicate folder structure
+     * Admin middleware groups web, auth, and routeNeedsPermission
+     */
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin' , 'namespace' => 'Backend'], function () {
         /**
          * These routes need view-backend permission
          * (good if you want to allow more than one group in the backend,
