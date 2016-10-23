@@ -23,8 +23,8 @@ return [
     | The application name for use within the UI of the application
     |
     */
-
-    'name' => 'Broccli',
+    
+    'name' => 'Spacify',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +115,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-128-CBC',
 
     /*
     |--------------------------------------------------------------------------
