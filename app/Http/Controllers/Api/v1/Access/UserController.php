@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api\v1\Access;
 
 use App\Http\Requests\Api\Access\RegisterRequest;
-use App\Models\Access\User\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
-use Illuminate\Contracts\Validation\Validator;
+use Dingo\Api\Exception\StoreResourceFailedException;
 
 /**
  * Class UserController
@@ -28,12 +27,14 @@ class UserController extends Controller
     }
 
     
-    public function register(RegisterRequest $request) {
+    public function register(RegisterRequest $request)
+    {
 
         $newUser = $this->users->create($request->all());
 
-        if($newUser)
-            return $newUser;
+        if (!$newUser)
+            throw new StoreResourceFailedException('Could not create new user.');
 
+        return $newUser;
     }
 }
