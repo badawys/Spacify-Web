@@ -30,6 +30,10 @@ class UserController extends Controller
     
     public function register(RegisterRequest $request) {
 
-        $this->users->create($request->all());
+        $newUser = $this->users->create($request->all());
+
+        if($newUser)
+            return $newUser;
+
     }
 }
