@@ -15,8 +15,14 @@ $api = app('Dingo\Api\Routing\Router');
 $api->group(['namespace' => 'Access'], function ($api) {
 
 	/**
-	 * Signup routes
+	 * User routes
 	 */
+
+	// Signup Route
 	$api->post('/register', 'UserController@register');
+	// Logout Route
+	$api->get('/logout', 'UserController@logout')->middleware('auth:api');
+
+
 });
 
