@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Access\User\SocialLogin;
 use App\Events\Frontend\Auth\UserConfirmed;
 use App\Repositories\Backend\Access\Role\RoleRepositoryContract;
-use League\OAuth2\Server\AuthorizationServer;
 
 /**
  * Class EloquentUserRepository
