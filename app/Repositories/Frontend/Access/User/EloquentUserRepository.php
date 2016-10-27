@@ -119,10 +119,16 @@ class EloquentUserRepository implements UserRepositoryContract
             $this->sendConfirmationEmail($user);
         }
 
+        $result = [
+            "name" => $user->name,
+            "email" => $user->email,
+            "confirmed" => $user->confirmed,
+        ];
+
         /**
          * Return the user object
          */
-        return $user;
+        return $result;
     }
 
     /**
