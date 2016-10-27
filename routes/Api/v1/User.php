@@ -12,7 +12,7 @@ $api = app('Dingo\Api\Routing\Router');
 |
 */
 
-$api->group(['namespace' => 'Access'], function ($api) {
+$api->group(['namespace' => 'User'], function ($api) {
 
 	/**
 	 * User routes
@@ -23,6 +23,6 @@ $api->group(['namespace' => 'Access'], function ($api) {
 	// Logout Route
 	$api->get('/logout', 'UserController@logout')->middleware('auth:api');
 
-
+    $api->get('/profile/{args?}', 'UserController@profile')->middleware('auth:api');
 });
 
