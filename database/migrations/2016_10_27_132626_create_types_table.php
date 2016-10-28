@@ -13,7 +13,7 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('spaces_types', function (Blueprint $table) {
             $table->integer('id');
             $table->string('name');
         });
@@ -25,6 +25,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        schema::drop('types');
+        schema::drop('spaces_types');
     }
 }
