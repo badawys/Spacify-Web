@@ -13,9 +13,11 @@ class MakeTypeForeignkeyToSpacesTable extends Migration
      */
     public function up()
     {
-                schema::table('spaces', function (Blueprint $table) {
-                $table->foreign('type')->references('id')->on('types')->change();
-            });
+        schema::table('spaces', function (Blueprint $table) {
+            $table->foreign('type')
+                ->references('id')
+                ->on('types');
+        });
     }
 
     /**

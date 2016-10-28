@@ -14,7 +14,9 @@ class MakeUserIdForeignkeyToSpacesTable extends Migration
     public function up()
     {
         schema::table('spaces', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->change();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
