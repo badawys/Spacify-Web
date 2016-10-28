@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1\User;
 
-use App\Http\Requests\Api\Access\RegisterRequest;
 use App\Http\Controllers\Controller;
-use App\Repositories\Frontend\Access\User\UserRepositoryContract;
+use App\Http\Requests\Api\Access\RegisterRequest;
+use App\Http\Requests\Api\User\UpdateProfileRequest;
+use App\Repositories\Api\Access\User\UserRepositoryContract;
 use Dingo\Api\Exception\StoreResourceFailedException;
+use Dingo\Api\Exception\UpdateResourceFailedException;
 use Lcobucci\JWT\Parser;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -45,6 +47,9 @@ class UserController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     */
     public function logout(Request $request) {
 
         //Revoke access token
@@ -54,7 +59,13 @@ class UserController extends Controller
         $token->revoke();
     }
 
-    public function profile(Request $request, $args){
+    /**
+     * @param Request $request
+     * @param $args
+     * @return array
+     */
+    public function getProfile(Request $request, $args){
+
         $result = [];
         $args = explode(",",$args);
         foreach($args as $value ){
@@ -73,6 +84,28 @@ class UserController extends Controller
         }
 
         return $result;
+    }
+
+    /**
+     * @param UpdateProfileRequest $request
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     * @throws UpdateResourceFailedException
+     */
+    public function updateProfile(UpdateProfileRequest $request) {
+
+        if($request->photo)
+            $photo = $request->file('photo')->store('profile_pic');
+
+        $response = $request->user()->update([
+            'name' => $request->name ?? $request->user()->name,
+            'email' => $request->email ?? $request->user()->email,
+            'photo' => $photo ?? $request->user()->photo,
+        ]);
+
+        if($response)
+            return Auth()->user();
+        else
+            throw new UpdateResourceFailedException('Could not update user.');
     }
 
 }

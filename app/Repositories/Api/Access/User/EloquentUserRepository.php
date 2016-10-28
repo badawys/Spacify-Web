@@ -3,6 +3,7 @@
 namespace App\Repositories\Api\Access\User;
 
 use App\Models\Access\User\User;
+use Dingo\Api\Exception\UpdateResourceFailedException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Exceptions\GeneralException;
@@ -250,17 +251,17 @@ class EloquentUserRepository implements UserRepositoryContract
         $user = $this->find($id);
         $user->name = $input['name'];
 
-        if ($user->canChangeEmail()) {
-            //Address is not current address
-            if ($user->email != $input['email']) {
-                //Emails have to be unique
-                if ($this->findByEmail($input['email'])) {
-                    throw new GeneralException(trans('exceptions.frontend.auth.email_taken'));
-                }
-
-                $user->email = $input['email'];
+        //Address is not current address
+        if ($user->email != $input['email']) {
+            //Emails have to be unique
+            if ($this->findByEmail($input['email'])) {
+                throw new UpdateResourceFailedException('This email is already taken!');
             }
+
+            $user->email = $input['email'];
         }
+
+        //TODO: Add Photo
 
         return $user->save();
     }

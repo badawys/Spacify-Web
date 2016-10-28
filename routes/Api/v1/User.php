@@ -20,9 +20,12 @@ $api->group(['namespace' => 'User'], function ($api) {
 
 	// Signup Route
 	$api->post('/register', 'UserController@register');
+
 	// Logout Route
 	$api->get('/logout', 'UserController@logout')->middleware('auth:api');
 
-    $api->get('/profile/{args?}', 'UserController@profile')->middleware('auth:api');
+	// Profile Rputes
+    $api->get('/profile/{args?}', 'UserController@getProfile')->middleware('auth:api');
+    $api->patch('/profile', 'UserController@updateProfile')->middleware('auth:api');
 });
 
