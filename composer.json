@@ -22,7 +22,8 @@
         "spatie/laravel-backup": "^3.0",
         "yajra/laravel-datatables-oracle": "~6.0",
         "laravel/passport": "^1.0",
-        "dingo/api": "1.0.x@dev"
+        "dingo/api": "1.0.x@dev",
+        "doctrine/dbal"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
