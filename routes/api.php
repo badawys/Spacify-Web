@@ -37,6 +37,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1'], function ($a
      * Namespaces indicate folder structure
      */
 
-    require(__DIR__ . '/Api/v1/Access.php');
+    require(__DIR__ . '/Api/v1/User.php');
 
 });
