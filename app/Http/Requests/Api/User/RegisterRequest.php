@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Access;
+namespace App\Http\Requests\Api\User;
 
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Illuminate\Contracts\Validation\Validator;
