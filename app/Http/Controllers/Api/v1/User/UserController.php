@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\RegisterRequest;
 use App\Http\Requests\Api\User\UpdateProfileRequest;
+use App\Models\Access\User\User;
 use App\Repositories\Api\Access\User\UserRepositoryContract;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\UpdateResourceFailedException;
@@ -88,8 +89,7 @@ class UserController extends Controller
 
     /**
      * @param UpdateProfileRequest $request
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     * @throws UpdateResourceFailedException
+     * @return array
      */
     public function updateProfile(UpdateProfileRequest $request) {
 
@@ -102,9 +102,13 @@ class UserController extends Controller
             'photo' => $photo ?? $request->user()->photo,
         ]);
 
-        if($response)
-            return Auth()->user();
-        else
+        if($response) {
+            $result = [];
+            $result['name'] = $request->user()->name;
+            $result['email'] = $request->user()->email;
+            $result['photo'] = $request->user()->photo;
+            return $result;
+        } else
             throw new UpdateResourceFailedException('Could not update user.');
     }
 
