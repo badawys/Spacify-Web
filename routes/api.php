@@ -20,7 +20,7 @@ $api = app('Dingo\Api\Routing\Router');
  */
 
 
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1'], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1', 'middleware' => ['api']], function ($api) {
 
     // example of protected route
     $api->get('/protected', ['middleware' => ['auth:api'], function (Request $request) {
