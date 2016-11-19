@@ -34,6 +34,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1', 'middleware' 
             "iat" => $now_seconds,
             "exp" => $now_seconds+(60*60),
             "uid" => $request->user()->id,
+            "claims" => array(
+                "email" => $request->user()->email,
+                "name" => $request->user()->name
+            )
         ];
         return \Firebase\JWT\JWT::encode($payload, $secret, "RS256");
     }]);
