@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\Access;
+namespace App\Http\Requests\Api\User;
 
-use Dingo\Api\Exception\StoreResourceFailedException;
+use Dingo\Api\Exception\UpdateResourceFailedException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required',
-            'email'                 => 'required|email|unique:users',
-            'password'              => 'required|alpha_num|min:6',
+            'name'                  => 'sometimes|required',
+            'email'                 => 'sometimes|required|email|unique:users,email,'. $this->user()->id,
+            'photo'                 => 'sometimes|required|image'
         ];
     }
 
@@ -42,6 +42,6 @@ class RegisterRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new StoreResourceFailedException('Could not create new user.', $validator->errors());
+        throw new UpdateResourceFailedException('Could not update user.', $validator->errors());
     }
 }
