@@ -19,11 +19,11 @@ class CreateSpacesTable extends Migration
             $table->integer('type');
             $table->float('langittute');
             $table->float('lattitude');
-            $table->text('data');
+            $table->json('data')
+                  ->nullable();
             $table->string('photo');
             $table->string('description');
             $table->integer('user_id');
-            $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at');
             $table->softDeletes();
