@@ -38,5 +38,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1'], function ($a
      */
 
     require(__DIR__ . '/Api/v1/Access.php');
+    require(__DIR__ . '/Api/v1/Space.php');
 
 });
