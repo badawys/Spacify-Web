@@ -73,6 +73,13 @@ class Handler extends ExceptionHandler
             return redirect()->route('user.edit', $e->userID())->withInput()->withFlashDanger($e->validationErrors());
         }
 
+        /**
+         * All instances of ApiException response with error message and error code in json format
+         */
+        if ($e instanceof ApiException) {
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
+        }
+
         
         return parent::render($request, $e);
     }
