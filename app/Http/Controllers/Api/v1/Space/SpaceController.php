@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use app\Http\Requests\Api\Space\CreateSpaceRequest;
 use app\Repositories\Api\Space\SpaceRepositoryContract;
-
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 
 class SpaceController extends Controller
@@ -29,4 +29,22 @@ class SpaceController extends Controller
 
            return $newSpace;
        }
+
+           public function  view(Request $request , $args)
+           {
+               $result = [];
+               $args = explode(",",$args);
+               foreach ($args as $value)
+               {
+                   if ($value == 'name')
+                       $result ['name'] = $request->space()->name;
+
+                   elseif ($value == 'photo')
+                       $result ['photo']=$request->space()->photo;
+
+                   else
+                       throw new BadRequestHttpException("Unknown Request Keyword");
+
+               }
+           }
 }
