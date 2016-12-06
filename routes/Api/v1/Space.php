@@ -17,4 +17,6 @@ $api->group(['namespace' => 'Space', 'middleware' => ['auth:api']], function ($a
      * Space routes
      */
     $api->post('/space','SpaceController@createSpace');
+
+    $api->get('/space/{args?}','SpaceController@view')->middleware('auth:api');
 });
