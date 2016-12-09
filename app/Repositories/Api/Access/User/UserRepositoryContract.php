@@ -20,17 +20,6 @@ interface UserRepositoryContract
      */
     public function findByEmail($email);
 
-    /**
-     * @param $token
-     * @return mixed
-     */
-    public function findByToken($token);
-
-    /**
-     * @param $token
-     * @return mixed
-     */
-    public function getEmailForPasswordToken($token);
 
     /**
      * @param array $data
@@ -40,34 +29,10 @@ interface UserRepositoryContract
     public function create(array $data, $provider = false);
 
     /**
-     * @param $data
-     * @param $provider
-     * @return mixed
-     */
-    public function findOrCreateSocial($data, $provider);
-
-    /**
-     * @param $token
-     * @return mixed
-     */
-    public function confirmAccount($token);
-
-    /**
-     * @param $user
-     * @return mixed
-     */
-    public function sendConfirmationEmail($user);
-
-    /**
      * @param $id
      * @param $input
      * @return mixed
      */
     public function updateProfile($id, $input);
 
-    /**
-     * @param  $input
-     * @return mixed
-     */
-    public function changePassword($input);
 }

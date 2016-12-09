@@ -1,29 +1,17 @@
 {
-    "name": "rappasoft/laravel-5-boilerplate",
-    "description": "The Laravel Framework Boilerplate Project.",
-    "keywords": [
-        "framework",
-        "laravel",
-        "boilerplate"
-    ],
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
-        "laravelcollective/html": "5.3.*",
-        "laracasts/utilities": "~2.0",
-        "laravel/socialite": "^2.0",
-        "creativeorange/gravatar": "~1.0",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "hieu-le/active": "~2.0",
         "arcanedev/log-viewer": "~3.0",
-        "arcanedev/no-captcha": "~3.0",
-        "spatie/laravel-backup": "^3.0",
-        "yajra/laravel-datatables-oracle": "~6.0",
         "laravel/passport": "^1.0",
         "dingo/api": "1.0.x@dev",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "tcg/voyager": "^0.10.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -32,7 +20,6 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "barryvdh/laravel-debugbar": "^2.1",
-        "laracasts/generators": "^1.1",
         "barryvdh/laravel-ide-helper": "^2.2"
     },
     "autoload": {
@@ -41,10 +28,7 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        },
-        "files": [
-            "app/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "classmap": [
@@ -53,7 +37,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
@@ -64,8 +48,6 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan ide-helper:generate",
-            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },

@@ -4,15 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Session\TokenMismatchException;
-use App\Exceptions\Backend\Access\User\UserNeedsRolesException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use League\OAuth2\Server\Exception\OAuthServerException;
 
-/**
- * Class Handler
- * @package App\Exceptions
- */
 class Handler extends ExceptionHandler
 {
     /**
@@ -34,61 +27,39 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $e
+     * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $e)
+    public function report(Exception $exception)
     {
-        parent::report($e);
+        parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
-        /**
-         * Redirect if token mismatch error
-         * Usually because user stayed on the same screen too long and their session expired
-         */
-        if ($e instanceof TokenMismatchException) {
-            return redirect()->route('auth.login');
-        }
-
-        /**
-         * All instances of GeneralException redirect back with a flash message to show a bootstrap alert-error
-         */
-        if ($e instanceof GeneralException) {
-            return redirect()->back()->withInput()->withFlashDanger($e->getMessage());
-        }
-
-        /**
-         * User needs roles and none were selected
-         */
-        if ($e instanceof UserNeedsRolesException) {
-            return redirect()->route('user.edit', $e->userID())->withInput()->withFlashDanger($e->validationErrors());
-        }
-
-        
-        return parent::render($request, $e);
+        return parent::render($request, $exception);
     }
+
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $e
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
-    protected function unauthenticated($request, AuthenticationException $e)
+    protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
-        } else {
-            return redirect()->guest('login');
         }
+
+        return redirect()->guest('login');
     }
 }
