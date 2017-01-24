@@ -14,20 +14,22 @@ return [
     */
 
     'general' => [
-        'home' => 'Home',
+        'home'   => 'Home',
         'logout' => 'Logout',
     ],
 
     'frontend' => [
         'dashboard' => 'Dashboard',
-        'login' => 'Login',
-        'macros' => 'Macros',
-        'register' => 'Register',
+        'login'     => 'Login',
+        'macros'    => 'Macros',
+        'register'  => 'Register',
 
         'user' => [
-            'administration' => 'Administration',
+            'account'         => 'My Account',
+            'administration'  => 'Administration',
             'change_password' => 'Change Password',
-            'my_information' => 'My Information',
+            'my_information'  => 'My Information',
+            'profile'         => 'Profile',
         ],
     ],
 ];

@@ -4,34 +4,32 @@ namespace App\Http\Controllers\Backend\Access\Role;
 
 use App\Models\Access\Role\Role;
 use App\Http\Controllers\Controller;
-use Yajra\Datatables\Facades\Datatables;
+use App\Repositories\Backend\Access\Role\RoleRepository;
 use App\Http\Requests\Backend\Access\Role\StoreRoleRequest;
 use App\Http\Requests\Backend\Access\Role\ManageRoleRequest;
 use App\Http\Requests\Backend\Access\Role\UpdateRoleRequest;
-use App\Repositories\Backend\Access\Role\RoleRepositoryContract;
-use App\Repositories\Backend\Access\Permission\PermissionRepositoryContract;
+use App\Repositories\Backend\Access\Permission\PermissionRepository;
 
 /**
- * Class RoleController
- * @package App\Http\Controllers\Access
+ * Class RoleController.
  */
 class RoleController extends Controller
 {
     /**
-     * @var RoleRepositoryContract
+     * @var RoleRepository
      */
     protected $roles;
 
     /**
-     * @var PermissionRepositoryContract
+     * @var PermissionRepository
      */
     protected $permissions;
 
     /**
-     * @param RoleRepositoryContract       $roles
-     * @param PermissionRepositoryContract $permissions
+     * @param RoleRepository       $roles
+     * @param PermissionRepository $permissions
      */
-    public function __construct(RoleRepositoryContract $roles, PermissionRepositoryContract $permissions)
+    public function __construct(RoleRepository $roles, PermissionRepository $permissions)
     {
         $this->roles = $roles;
         $this->permissions = $permissions;
@@ -39,6 +37,7 @@ class RoleController extends Controller
 
     /**
      * @param ManageRoleRequest $request
+     *
      * @return mixed
      */
     public function index(ManageRoleRequest $request)
@@ -48,61 +47,32 @@ class RoleController extends Controller
 
     /**
      * @param ManageRoleRequest $request
-     * @return mixed
-     */
-    public function get(ManageRoleRequest $request)
-    {
-        return Datatables::of($this->roles->getForDataTable())
-            ->addColumn('permissions', function ($role) {
-                $permissions = [];
-
-                if ($role->all) {
-                    return '<span class="label label-success">' . trans('labels.general.all') . '</span>';
-                }
-
-                if (count($role->permissions) > 0) {
-                    foreach ($role->permissions as $permission) {
-                        array_push($permissions, $permission->display_name);
-                    }
-
-                    return implode("<br/>", $permissions);
-                } else {
-                    return '<span class="label label-danger">' . trans('labels.general.none') . '</span>';
-                }
-            })
-            ->addColumn('users', function ($role) {
-                return $role->users()->count();
-            })
-            ->addColumn('actions', function ($role) {
-                return $role->action_buttons;
-            })
-            ->make(true);
-    }
-
-    /**
-     * @param ManageRoleRequest $request
+     *
      * @return mixed
      */
     public function create(ManageRoleRequest $request)
     {
         return view('backend.access.roles.create')
-            ->withPermissions($this->permissions->getAllPermissions())
+            ->withPermissions($this->permissions->getAll())
             ->withRoleCount($this->roles->getCount());
     }
 
     /**
-     * @param  StoreRoleRequest $request
+     * @param StoreRoleRequest $request
+     *
      * @return mixed
      */
     public function store(StoreRoleRequest $request)
     {
         $this->roles->create($request->all());
-        return redirect()->route('role.index')->withFlashSuccess(trans('alerts.backend.roles.created'));
+
+        return redirect()->route('admin.access.role.index')->withFlashSuccess(trans('alerts.backend.roles.created'));
     }
 
     /**
-     * @param  Role $role
-     * @param  ManageRoleRequest $request
+     * @param Role              $role
+     * @param ManageRoleRequest $request
+     *
      * @return mixed
      */
     public function edit(Role $role, ManageRoleRequest $request)
@@ -110,28 +80,32 @@ class RoleController extends Controller
         return view('backend.access.roles.edit')
             ->withRole($role)
             ->withRolePermissions($role->permissions->pluck('id')->all())
-            ->withPermissions($this->permissions->getAllPermissions());
+            ->withPermissions($this->permissions->getAll());
     }
 
     /**
-     * @param  Role $role
-     * @param  UpdateRoleRequest $request
+     * @param Role              $role
+     * @param UpdateRoleRequest $request
+     *
      * @return mixed
      */
     public function update(Role $role, UpdateRoleRequest $request)
     {
         $this->roles->update($role, $request->all());
-        return redirect()->route('role.index')->withFlashSuccess(trans('alerts.backend.roles.updated'));
+
+        return redirect()->route('admin.access.role.index')->withFlashSuccess(trans('alerts.backend.roles.updated'));
     }
 
     /**
-     * @param  Role $role
-     * @param  ManageRoleRequest $request
+     * @param Role              $role
+     * @param ManageRoleRequest $request
+     *
      * @return mixed
      */
     public function destroy(Role $role, ManageRoleRequest $request)
     {
-        $this->roles->destroy($role);
-        return redirect()->route('role.index')->withFlashSuccess(trans('alerts.backend.roles.deleted'));
+        $this->roles->delete($role);
+
+        return redirect()->route('admin.access.role.index')->withFlashSuccess(trans('alerts.backend.roles.deleted'));
     }
 }

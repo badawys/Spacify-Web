@@ -14,20 +14,22 @@ return [
     */
 
     'general' => [
-        'home' => 'Inicio',
+        'home'   => 'Inicio',
         'logout' => 'Cerrar Sessión',
     ],
 
     'frontend' => [
         'dashboard' => 'Principal',
-        'login' => 'Iniciar Sessión',
-        'macros' => 'Macros',
-        'register' => 'Registrarse',
+        'login'     => 'Iniciar Sessión',
+        'macros'    => 'Macros',
+        'register'  => 'Registrarse',
 
         'user' => [
-            'administration' => 'Administración',
+            'account'         => 'Mi Cuenta',
+            'administration'  => 'Administración',
             'change_password' => 'Cambiar la contraseña',
-            'my_information' => 'Mi Cuenta',
+            'my_information'  => 'Mi Cuenta',
+            'profile'         => 'Perfil',
         ],
     ],
 ];

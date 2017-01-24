@@ -1,7 +1,9 @@
 <?php
 
-return [
+use App\Models\Access\Role\Role;
+use App\Models\Access\Permission\Permission;
 
+return [
     /*
      * Users table used to store users
      */
@@ -10,7 +12,7 @@ return [
     /*
      * Role model used by Access to create correct relations. Update the role if it is in a different namespace.
     */
-    'role' => App\Models\Access\Role\Role::class,
+    'role' => Role::class,
 
     /*
      * Roles table used by Access to save roles to the database.
@@ -21,7 +23,7 @@ return [
      * Permission model used by Access to create correct relations.
      * Update the permission if it is in a different namespace.
      */
-    'permission' => App\Models\Access\Permission\Permission::class,
+    'permission' => Permission::class,
 
     /*
      * Permissions table used by Access to save permissions to the database.
@@ -34,14 +36,19 @@ return [
     'permission_role_table' => 'permission_role',
 
     /*
-     * assigned_roles table used by Access to save assigned roles to the database.
+     * role_user table used by Access to save assigned roles to the database.
      */
-    'assigned_roles_table' => 'assigned_roles',
+    'role_user_table' => 'role_user',
 
     /*
      * Configurations for the user
      */
     'users' => [
+        /*
+         * Whether or not public registration is on
+         */
+        'registration' => env('ENABLE_REGISTRATION', 'true'),
+
         /*
          * The role the user is assigned to when they sign up from the frontend, not namespaced
          */
@@ -56,7 +63,7 @@ return [
         /*
          * Whether or not the users email can be changed on the edit profile screen
          */
-        'change_email' => false,
+        'change_email' => true,
     ],
 
     /*
@@ -66,7 +73,7 @@ return [
         /*
          * Whether a role must contain a permission or can be used standalone as a label
          */
-        'role_must_contain_permission' => true
+        'role_must_contain_permission' => true,
     ],
 
     /*
@@ -81,23 +88,8 @@ return [
      */
     'captcha' => [
         /*
-		 * The name of the session variable that stores the current login attempts for each user
-		 */
-        'session_key' => 'needs_captcha',
-
-        /*
          * Whether the registration captcha is on or off
          */
         'registration' => env('REGISTRATION_CAPTCHA_STATUS', false),
-
-        /*
-         * Whether the login captcha is on or off
-         */
-        'login' => env('LOGIN_CAPTCHA_STATUS', false),
-
-        /*
-         * Number of login tries made before showing login captcha
-         */
-        'login_tries' => env('LOGIN_CAPTCHA_TRIES', 3),
-     ],
+    ],
 ];

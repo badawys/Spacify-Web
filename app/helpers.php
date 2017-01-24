@@ -1,13 +1,11 @@
 <?php
 
 /**
- * Global helpers file with misc functions
- *
+ * Global helpers file with misc functions.
  */
-
 if (! function_exists('app_name')) {
     /**
-     * Helper to grab the application name
+     * Helper to grab the application name.
      *
      * @return mixed
      */
@@ -19,7 +17,7 @@ if (! function_exists('app_name')) {
 
 if (! function_exists('access')) {
     /**
-     * Access (lol) the Access:: facade as a simple function
+     * Access (lol) the Access:: facade as a simple function.
      */
     function access()
     {
@@ -28,8 +26,8 @@ if (! function_exists('access')) {
 }
 
 if (! function_exists('history')) {
-/**
-     * Access the history facade anywhere
+    /**
+     * Access the history facade anywhere.
      */
     function history()
     {
@@ -37,19 +35,9 @@ if (! function_exists('history')) {
     }
 }
 
-if (! function_exists('javascript')) {
-    /**
-     * Access the javascript helper
-     */
-    function javascript()
-    {
-        return app('JavaScript');
-    }
-}
-
 if (! function_exists('gravatar')) {
     /**
-     * Access the gravatar helper
+     * Access the gravatar helper.
      */
     function gravatar()
     {
@@ -57,37 +45,30 @@ if (! function_exists('gravatar')) {
     }
 }
 
-if (! function_exists('getFallbackLocale')) {
-    /**
-     * Get the fallback locale
-     *
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    function getFallbackLocale()
-    {
-        return config('app.fallback_locale');
-    }
-}
-
-if (! function_exists('getLanguageBlock')) {
+if (! function_exists('includeRouteFiles')) {
 
     /**
-     * Get the language block with a fallback
+     * Loops through a folder and requires all PHP files
+     * Searches sub-directories as well.
      *
-     * @param $view
-     * @param array $data
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param $folder
      */
-    function getLanguageBlock($view, $data = [])
+    function includeRouteFiles($folder)
     {
-        $components = explode("lang", $view);
-        $current  = $components[0]."lang.".app()->getLocale().".".$components[1];
-        $fallback  = $components[0]."lang.".getFallbackLocale().".".$components[1];
+        $directory = $folder;
+        $handle = opendir($directory);
+        $directory_list = [$directory];
 
-        if (view()->exists($current)) {
-            return view($current, $data);
-        } else {
-            return view($fallback, $data);
+        while (false !== ($filename = readdir($handle))) {
+            if ($filename != '.' && $filename != '..' && is_dir($directory.$filename)) {
+                array_push($directory_list, $directory.$filename.'/');
+            }
+        }
+
+        foreach ($directory_list as $directory) {
+            foreach (glob($directory.'*.php') as $filename) {
+                require $filename;
+            }
         }
     }
 }

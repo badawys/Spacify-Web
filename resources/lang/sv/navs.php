@@ -14,20 +14,22 @@ return [
     */
 
     'general' => [
-        'home' => 'Start',
+        'home'   => 'Start',
         'logout' => 'Logga ut',
     ],
 
     'frontend' => [
         'dashboard' => 'Kontrollpanelen',
-        'login' => 'Logga in',
-        'macros' => 'Macros',
-        'register' => 'Registrera',
+        'login'     => 'Logga in',
+        'macros'    => 'Macros',
+        'register'  => 'Registrera',
 
         'user' => [
-            'administration' => 'Adminpanelen',
+            'account'         => 'Mitt konto',
+            'administration'  => 'Adminpanelen',
             'change_password' => 'Byt lösenord',
-            'my_information' => 'Min profil',
+            'my_information'  => 'Min profil',
+            'profile'         => 'Profil',
         ],
     ],
 ];

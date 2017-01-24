@@ -2,45 +2,49 @@
 
 /**
  * Frontend Access Controllers
+ * All route names are prefixed with 'frontend.auth'.
  */
-Route::group(['namespace' => 'Auth'], function () {
+Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
 
-    /**
+    /*
      * These routes require the user to be logged in
      */
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('logout', 'AuthController@logout')->name('auth.logout');
+        Route::get('logout', 'LoginController@logout')->name('logout');
 
         //For when admin is logged in as user from backend
-        Route::get('logout-as', '\App\Http\Controllers\Backend\Access\User\UserController@logoutAs')->name('auth.logout-as');
+        Route::get('logout-as', 'LoginController@logoutAs')->name('logout-as');
 
         // Change Password Routes
-        Route::get('password/change', 'PasswordController@showChangePasswordForm')->name('auth.password.change');
-        Route::post('password/change', 'PasswordController@changePassword')->name('auth.password.change');
+        Route::patch('password/change', 'ChangePasswordController@changePassword')->name('password.change');
     });
 
-    /**
-     * These routes require the user NOT be logged in
+    /*
+     * These routes require no user to be logged in
      */
     Route::group(['middleware' => 'guest'], function () {
         // Authentication Routes
-        Route::get('login', 'AuthController@showLoginForm')->name('auth.login');
-        Route::post('login', 'AuthController@login')->name('auth.login');
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login')->name('login');
 
         // Socialite Routes
-        Route::get('login/{provider}', 'AuthController@loginThirdParty')->name('auth.provider');
+        Route::get('login/{provider}', 'SocialLoginController@login')->name('social.login');
 
         // Registration Routes
-        Route::get('register', 'AuthController@showRegistrationForm')->name('auth.register');
-        Route::post('register', 'AuthController@register')->name('auth.register');
+        if (config('access.users.registration')) {
+            Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+            Route::post('register', 'RegisterController@register')->name('register');
+        }
 
         // Confirm Account Routes
-        Route::get('account/confirm/{token}', 'AuthController@confirmAccount')->name('account.confirm');
-        Route::get('account/confirm/resend/{user_id}', 'AuthController@resendConfirmationEmail')->name('account.confirm.resend');
+        Route::get('account/confirm/{token}', 'ConfirmAccountController@confirm')->name('account.confirm');
+        Route::get('account/confirm/resend/{user}', 'ConfirmAccountController@sendConfirmationEmail')->name('account.confirm.resend');
 
         // Password Reset Routes
-        Route::get('password/reset/{token?}', 'PasswordController@showResetForm')->name('auth.password.reset');
-        Route::post('password/reset', 'PasswordController@reset')->name('auth.password.reset');
-        Route::post('password/email', 'PasswordController@sendResetLinkEmail')->name('auth.password.email');
+        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.email');
+        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
+        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset.form');
+        Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
     });
 });

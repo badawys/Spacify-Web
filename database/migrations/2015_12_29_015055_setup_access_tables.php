@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class SetupAccessTables.
+ */
 class SetupAccessTables extends Migration
 {
     /**
@@ -14,6 +18,9 @@ class SetupAccessTables extends Migration
     {
         Schema::table(config('access.users_table'), function ($table) {
             $table->tinyInteger('status')->after('password')->default(1)->unsigned();
+            $table->string('confirmation_code')->after('status')->nullable();
+            $table->boolean('confirmed')->after('confirmation_code')->default(config('access.users.confirm_email') ? false : true);
+            $table->softDeletes();
         });
 
         Schema::create(config('access.roles_table'), function ($table) {
@@ -21,21 +28,20 @@ class SetupAccessTables extends Migration
             $table->string('name');
             $table->boolean('all')->default(false);
             $table->smallInteger('sort')->default(0)->unsigned();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
-            /**
+            /*
              * Add Foreign/Unique/Index
              */
             $table->unique('name');
         });
 
-        Schema::create(config('access.assigned_roles_table'), function ($table) {
+        Schema::create(config('access.role_user_table'), function ($table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
-            /**
+            /*
              * Add Foreign/Unique/Index
              */
             $table->foreign('user_id')
@@ -54,10 +60,9 @@ class SetupAccessTables extends Migration
             $table->string('name');
             $table->string('display_name');
             $table->smallInteger('sort')->default(0)->unsigned();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
-            /**
+            /*
              * Add Foreign/Unique/Index
              */
             $table->unique('name');
@@ -68,7 +73,7 @@ class SetupAccessTables extends Migration
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
-            /**
+            /*
              * Add Foreign/Unique/Index
              */
             $table->foreign('permission_id')
@@ -91,36 +96,36 @@ class SetupAccessTables extends Migration
     public function down()
     {
         Schema::table(config('access.users_table'), function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropColumn(['status', 'confirmed', 'confirmation_code', 'deleted_at']);
         });
 
-        /**
+        /*
          * Remove Foreign/Unique/Index
          */
         Schema::table(config('access.roles_table'), function (Blueprint $table) {
-            $table->dropUnique(config('access.roles_table') . '_name_unique');
+            $table->dropUnique(config('access.roles_table').'_name_unique');
         });
 
-        Schema::table(config('access.assigned_roles_table'), function (Blueprint $table) {
-            $table->dropForeign(config('access.assigned_roles_table') . '_user_id_foreign');
-            $table->dropForeign(config('access.assigned_roles_table') . '_role_id_foreign');
+        Schema::table(config('access.role_user_table'), function (Blueprint $table) {
+            $table->dropForeign(config('access.role_user_table').'_user_id_foreign');
+            $table->dropForeign(config('access.role_user_table').'_role_id_foreign');
         });
 
         Schema::table(config('access.permissions_table'), function (Blueprint $table) {
-            $table->dropUnique(config('access.permissions_table') . '_name_unique');
+            $table->dropUnique(config('access.permissions_table').'_name_unique');
         });
 
         Schema::table(config('access.permission_role_table'), function (Blueprint $table) {
-            $table->dropForeign(config('access.permission_role_table') . '_permission_id_foreign');
-            $table->dropForeign(config('access.permission_role_table') . '_role_id_foreign');
+            $table->dropForeign(config('access.permission_role_table').'_permission_id_foreign');
+            $table->dropForeign(config('access.permission_role_table').'_role_id_foreign');
         });
 
-        /**
+        /*
          * Drop tables
          */
-        Schema::drop(config('access.assigned_roles_table'));
-        Schema::drop(config('access.permission_role_table'));
-        Schema::drop(config('access.roles_table'));
-        Schema::drop(config('access.permissions_table'));
+        Schema::dropIfExists(config('access.role_user_table'));
+        Schema::dropIfExists(config('access.permission_role_table'));
+        Schema::dropIfExists(config('access.roles_table'));
+        Schema::dropIfExists(config('access.permissions_table'));
     }
 }

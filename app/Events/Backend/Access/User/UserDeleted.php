@@ -6,15 +6,14 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class UserDeleted
- * @package App\Events\Backend\Access\User
+ * Class UserDeleted.
  */
 class UserDeleted extends Event
 {
     use SerializesModels;
 
     /**
-     * @var $user
+     * @var
      */
     public $user;
 
