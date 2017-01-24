@@ -118,5 +118,5 @@ elixir((mix) => {
     /**
      * Run tests
      */
-    .phpUnit();
+    // .phpUnit();
 });
