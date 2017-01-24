@@ -6,12 +6,10 @@ use Closure;
 use Illuminate\Session\Store;
 
 /**
- * Class SessionTimeout
- * @package App\Http\Middleware
+ * Class SessionTimeout.
  */
 class SessionTimeout
 {
-
     /**
      * @var Store
      */
@@ -34,8 +32,9 @@ class SessionTimeout
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -43,7 +42,7 @@ class SessionTimeout
         if (config('misc.session_timeout_status')) {
             $isLoggedIn = $request->path() != '/logout';
 
-            if (!session('lastActivityTime')) {
+            if (! session('lastActivityTime')) {
                 $this->session->put('lastActivityTime', time());
             } elseif (time() - $this->session->get('lastActivityTime') > $this->timeout) {
                 $this->session->forget('lastActivityTime');
@@ -51,7 +50,7 @@ class SessionTimeout
                 $email = $request->user()->email;
                 access()->logout();
 
-                return redirect()->to('/login')->withFlashWarning(trans('strings.backend.general.timeout') . $this->timeout / 60 . trans('strings.backend.general.minutes'))->withInput(compact('email'))->withCookie($cookie);
+                return redirect()->route('frontend.auth.login')->withFlashWarning(trans('strings.backend.general.timeout').$this->timeout / 60 .trans('strings.backend.general.minutes'))->withInput(compact('email'))->withCookie($cookie);
             }
 
             $isLoggedIn ? $this->session->put('lastActivityTime', time()) : $this->session->forget('lastActivityTime');

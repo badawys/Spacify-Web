@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateHistoryTables.
+ */
 class CreateHistoryTables extends Migration
 {
     /**
@@ -24,20 +28,20 @@ class CreateHistoryTables extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('entity_id')->unsigned()->nullable();
             $table->string('icon')->nullable();
-			$table->string('class')->nullable();
+            $table->string('class')->nullable();
             $table->string('text');
-            $table->string('assets')->nullable();
+            $table->text('assets')->nullable();
             $table->timestamps();
 
-			$table->foreign('type_id')
-				->references('id')
-				->on('history_types')
-				->onDelete('cascade');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('history_types')
+                ->onDelete('cascade');
 
-			$table->foreign('user_id')
-				->references('id')
-				->on(config('access.users_table'))
-				->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on(config('access.users_table'))
+                ->onDelete('cascade');
         });
     }
 
@@ -48,12 +52,12 @@ class CreateHistoryTables extends Migration
      */
     public function down()
     {
-		Schema::table('history', function (Blueprint $table) {
-			$table->dropForeign('history_type_id_foreign');
-			$table->dropForeign('history_user_id_foreign');
-		});
+        Schema::table('history', function (Blueprint $table) {
+            $table->dropForeign('history_type_id_foreign');
+            $table->dropForeign('history_user_id_foreign');
+        });
 
-        Schema::drop('history_types');
-        Schema::drop('history');
+        Schema::dropIfExists('history_types');
+        Schema::dropIfExists('history');
     }
 }

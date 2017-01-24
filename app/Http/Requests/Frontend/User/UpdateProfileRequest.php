@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests\Frontend\User;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
 /**
- * Class UpdateProfileRequest
- * @package App\Http\Requests\Frontend\User
+ * Class UpdateProfileRequest.
  */
-class UpdateProfileRequest extends FormRequest
+class UpdateProfileRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

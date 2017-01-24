@@ -6,15 +6,14 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class RoleUpdated
- * @package App\Events\Backend\Access\Role
+ * Class RoleUpdated.
  */
 class RoleUpdated extends Event
 {
     use SerializesModels;
 
     /**
-     * @var $role
+     * @var
      */
     public $role;
 

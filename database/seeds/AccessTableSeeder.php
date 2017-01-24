@@ -3,8 +3,16 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class AccessTableSeeder.
+ */
 class AccessTableSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         if (DB::connection()->getDriverName() == 'mysql') {
@@ -20,6 +28,5 @@ class AccessTableSeeder extends Seeder
         if (DB::connection()->getDriverName() == 'mysql') {
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         }
-
     }
 }

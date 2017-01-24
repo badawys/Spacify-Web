@@ -1,4 +1,4 @@
-@extends ('backend.layouts.master')
+@extends ('backend.layouts.app')
 
 @section ('title', trans('labels.backend.access.users.management') . ' | ' . trans('labels.backend.access.users.create'))
 
@@ -10,14 +10,14 @@
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
+    {{ Form::open(['route' => 'admin.access.user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
 
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">{{ trans('labels.backend.access.users.create') }}</h3>
 
                 <div class="box-tools pull-right">
-                    @include('backend.access.includes.partials.header-buttons')
+                    @include('backend.access.includes.partials.user-header-buttons')
                 </div><!--box-tools pull-right-->
             </div><!-- /.box-header -->
 
@@ -39,18 +39,18 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('password', trans('validation.attributes.backend.access.users.password'), ['class' => 'col-lg-2 control-label', 'placeholder' => trans('validation.attributes.backend.access.users.password')]) }}
+                    {{ Form::label('password', trans('validation.attributes.backend.access.users.password'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
-                        {{ Form::password('password', ['class' => 'form-control']) }}
+                        {{ Form::password('password', ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.users.password')]) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('password_confirmation', trans('validation.attributes.backend.access.users.password_confirmation'), ['class' => 'col-lg-2 control-label', 'placeholder' => trans('validation.attributes.backend.access.users.password_confirmation')]) }}
+                    {{ Form::label('password_confirmation', trans('validation.attributes.backend.access.users.password_confirmation'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
-                        {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
+                        {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.users.password_confirmation')]) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
@@ -86,7 +86,7 @@
                     <div class="col-lg-3">
                         @if (count($roles) > 0)
                             @foreach($roles as $role)
-                                <input type="checkbox" value="{{ $role->id }}" name="assignees_roles[]" id="role-{{ $role->id }}" /> <label for="role-{{ $role->id }}">{{ $role->name }}</label>
+                                <input type="checkbox" value="{{ $role->id }}" name="assignees_roles[{{ $role->id }}]" id="role-{{ $role->id }}" {{ is_array(old('assignees_roles')) && in_array($role->id, old('assignees_roles')) ? 'checked' : '' }} /> <label for="role-{{ $role->id }}">{{ $role->name }}</label>
                                 <a href="#" data-role="role_{{ $role->id }}" class="show-permissions small">
                                     (
                                         <span class="show-text">{{ trans('labels.general.show') }}</span>
@@ -122,7 +122,7 @@
         <div class="box box-info">
             <div class="box-body">
                 <div class="pull-left">
-                    {{ link_to_route('user.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+                    {{ link_to_route('admin.access.user.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
                 </div><!--pull-left-->
 
                 <div class="pull-right">
@@ -136,6 +136,6 @@
     {{ Form::close() }}
 @stop
 
-@section('after-scripts-end')
+@section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
 @stop

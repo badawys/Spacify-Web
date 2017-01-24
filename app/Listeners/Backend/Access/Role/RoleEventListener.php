@@ -3,8 +3,7 @@
 namespace App\Listeners\Backend\Access\Role;
 
 /**
- * Class RoleEventListener
- * @package App\Listeners\Backend\Access\Role
+ * Class RoleEventListener.
  */
 class RoleEventListener
 {
@@ -20,7 +19,7 @@ class RoleEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.roles.created") <strong>'.$event->role->name.'</strong>',
+            'trans("history.backend.roles.created") '.$event->role->name,
             $event->role->id,
             'plus',
             'bg-green'
@@ -34,7 +33,7 @@ class RoleEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.roles.updated") <strong>'.$event->role->name.'</strong>',
+            'trans("history.backend.roles.updated") '.$event->role->name,
             $event->role->id,
             'save',
             'bg-aqua'
@@ -48,7 +47,7 @@ class RoleEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.roles.deleted") <strong>'.$event->role->name.'</strong>',
+            'trans("history.backend.roles.deleted") '.$event->role->name,
             $event->role->id,
             'trash',
             'bg-maroon'
@@ -58,7 +57,7 @@ class RoleEventListener
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param \Illuminate\Events\Dispatcher $events
      */
     public function subscribe($events)
     {

@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class AccessServiceProvider
- * @package App\Providers
+ * Class AccessServiceProvider.
  */
 class AccessServiceProvider extends ServiceProvider
 {
@@ -20,7 +19,7 @@ class AccessServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Package boot method
+     * Package boot method.
      */
     public function boot()
     {
@@ -36,7 +35,6 @@ class AccessServiceProvider extends ServiceProvider
     {
         $this->registerAccess();
         $this->registerFacade();
-        $this->registerBindings();
     }
 
     /**
@@ -65,80 +63,49 @@ class AccessServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register service provider bindings
-     */
-    public function registerBindings()
-    {
-        $this->app->bind(
-            \App\Repositories\Frontend\Access\User\UserRepositoryContract::class,
-            \App\Repositories\Frontend\Access\User\EloquentUserRepository::class
-        );
-
-        $this->app->bind(
-            \App\Repositories\Backend\Access\User\UserRepositoryContract::class,
-            \App\Repositories\Backend\Access\User\EloquentUserRepository::class
-        );
-
-        $this->app->bind(
-            \App\Repositories\Backend\Access\Role\RoleRepositoryContract::class,
-            \App\Repositories\Backend\Access\Role\EloquentRoleRepository::class
-        );
-
-        $this->app->bind(
-            \App\Repositories\Backend\Access\Permission\PermissionRepositoryContract::class,
-            \App\Repositories\Backend\Access\Permission\EloquentPermissionRepository::class
-        );
-
-        $this->app->bind(
-            \App\Repositories\Api\Access\User\UserRepositoryContract::class,
-            \App\Repositories\Api\Access\User\EloquentUserRepository::class
-        );
-    }
-
-    /**
-     * Register the blade extender to use new blade sections
+     * Register the blade extender to use new blade sections.
      */
     protected function registerBladeExtensions()
     {
-        /**
+        /*
          * Role based blade extensions
          * Accepts either string of Role Name or Role ID
          */
         Blade::directive('role', function ($role) {
-            return "<?php if (access()->hasRole($role)): ?>";
+            return "<?php if (access()->hasRole({$role})): ?>";
         });
 
-        /**
+        /*
          * Accepts array of names or id's
          */
         Blade::directive('roles', function ($roles) {
-            return "<?php if (access()->hasRoles($roles)): ?>";
+            return "<?php if (access()->hasRoles({$roles})): ?>";
         });
 
         Blade::directive('needsroles', function ($roles) {
-            return '<?php if (access()->hasRoles(' . $roles . ', true)): ?>';
+            return '<?php if (access()->hasRoles('.$roles.', true)): ?>';
         });
 
-        /**
+        /*
          * Permission based blade extensions
          * Accepts wither string of Permission Name or Permission ID
          */
         Blade::directive('permission', function ($permission) {
-            return "<?php if (access()->allow($permission)): ?>";
+            return "<?php if (access()->allow({$permission})): ?>";
         });
 
-        /**
+        /*
          * Accepts array of names or id's
          */
         Blade::directive('permissions', function ($permissions) {
-            return "<?php if (access()->allowMultiple($permissions)): ?>";
+            return "<?php if (access()->allowMultiple({$permissions})): ?>";
         });
 
         Blade::directive('needspermissions', function ($permissions) {
-            return '<?php if (access()->allowMultiple(' . $permissions . ', true)): ?>';
+            return '<?php if (access()->allowMultiple('.$permissions.', true)): ?>';
         });
 
-        /**
+        /*
          * Generic if closer to not interfere with built in blade
          */
         Blade::directive('endauth', function () {

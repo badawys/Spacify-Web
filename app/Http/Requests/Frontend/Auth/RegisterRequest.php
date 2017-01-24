@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Frontend\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 
 /**
- * Class RegisterRequest
- * @package App\Http\Requests\Frontend\Access
+ * Class RegisterRequest.
  */
-class RegisterRequest extends FormRequest
+class RegisterRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name'                 => 'required|max:255',
+            'email'                => ['required', 'email', 'max:255', Rule::unique('users')],
+            'password'             => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required_if:captcha_status,true|captcha',
         ];
     }

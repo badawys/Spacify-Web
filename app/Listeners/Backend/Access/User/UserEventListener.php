@@ -3,8 +3,7 @@
 namespace App\Listeners\Backend\Access\User;
 
 /**
- * Class UserEventListener
- * @package App\Listeners\Backend\Access\User
+ * Class UserEventListener.
  */
 class UserEventListener
 {
@@ -20,7 +19,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.created") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.created") '.$event->user->name,
             $event->user->id,
             'plus',
             'bg-green'
@@ -34,7 +33,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.updated") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.updated") '.$event->user->name,
             $event->user->id,
             'save',
             'bg-aqua'
@@ -48,7 +47,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.deleted") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.deleted") '.$event->user->name,
             $event->user->id,
             'trash',
             'bg-maroon'
@@ -62,7 +61,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.restored") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.restored") '.$event->user->name,
             $event->user->id,
             'refresh',
             'bg-aqua'
@@ -76,7 +75,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.permanently_deleted") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.permanently_deleted") '.$event->user->name,
             $event->user->id,
             'trash',
             'bg-maroon'
@@ -90,7 +89,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.changed_password") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.changed_password") '.$event->user->name,
             $event->user->id,
             'lock',
             'bg-blue'
@@ -104,7 +103,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.deactivated") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.deactivated") '.$event->user->name,
             $event->user->id,
             'times',
             'bg-yellow'
@@ -118,7 +117,7 @@ class UserEventListener
     {
         history()->log(
             $this->history_slug,
-            'trans("history.backend.users.reactivated") <strong>'.$event->user->name.'</strong>',
+            'trans("history.backend.users.reactivated") '.$event->user->name,
             $event->user->id,
             'check',
             'bg-green'
@@ -128,7 +127,7 @@ class UserEventListener
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param \Illuminate\Events\Dispatcher $events
      */
     public function subscribe($events)
     {

@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests\Backend\Access\User;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
 /**
- * Class ManageUserRequest
- * @package App\Http\Requests\Backend\Access\User
+ * Class ManageUserRequest.
  */
-class ManageUserRequest extends FormRequest
+class ManageUserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
