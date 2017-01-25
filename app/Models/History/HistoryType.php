@@ -1,14 +1,15 @@
-<?php namespace App\Models\History;
+<?php
+
+namespace App\Models\History;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class HistoryType
- * package App
+ * package App.
  */
 class HistoryType extends Model
 {
-
     /**
      * The database table used by the model.
      *

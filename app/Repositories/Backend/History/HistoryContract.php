@@ -1,14 +1,12 @@
-<?php namespace App\Repositories\Backend\History;
+<?php
 
-use App\Models\History\History;
+namespace App\Repositories\Backend\History;
 
 /**
- * Interface HistoryContract
- * @package App\Repositories\Backend\History
+ * Interface HistoryContract.
  */
 interface HistoryContract
 {
-
     /**
      * @param $type
      * @param $text
@@ -16,43 +14,64 @@ interface HistoryContract
      * @param null $icon
      * @param null $class
      * @param null $assets
+     *
      * @return mixed
      */
     public function log($type, $text, $entity_id = null, $icon = null, $class = null, $assets = null);
 
     /**
+     * @param null $limit
+     * @param bool $paginate
+     * @param int  $pagination
+     *
      * @return mixed
      */
-    public function render();
+    public function render($limit = null, $paginate = true, $pagination = 10);
 
     /**
      * @param $type
+     * @param null $limit
+     * @param bool $paginate
+     * @param int  $pagination
+     *
      * @return mixed
      */
-    public function renderType($type);
+    public function renderType($type, $limit = null, $paginate = true, $pagination = 10);
 
     /**
+     * @param $type
      * @param $entity_id
+     * @param null $limit
+     * @param bool $paginate
+     * @param int  $pagination
+     *
      * @return mixed
      */
-    public function renderEntity($entity_id);
+    public function renderEntity($type, $entity_id, $limit = null, $paginate = true, $pagination = 10);
 
     /**
      * @param $text
      * @param bool $assets
+     *
      * @return mixed
      */
     public function renderDescription($text, $assets = false);
 
     /**
-     * @param $items
+     * @param $history
+     * @param bool $paginate
+     *
      * @return mixed
      */
-    public function buildList($items);
+    public function buildList($history, $paginate = true);
 
     /**
-     * @param History $history
+     * @param $query
+     * @param $limit
+     * @param $paginate
+     * @param $pagination
+     *
      * @return mixed
      */
-    public function buildItem(History $history);
+    public function buildPagination($query, $limit, $paginate, $pagination);
 }

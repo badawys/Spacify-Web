@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api\v1\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\RegisterRequest;
 use App\Http\Requests\Api\User\UpdateProfileRequest;
-use App\Models\Access\User\User;
-use App\Repositories\Api\Access\User\UserRepositoryContract;
+use App\Repositories\Api\Access\User\UserRepository;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\UpdateResourceFailedException;
 use Lcobucci\JWT\Parser;
@@ -19,15 +18,15 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class UserController extends Controller
 {
     /**
-     * @var UserRepositoryContract
+     * @var UserRepository
      */
     protected $users;
 
 
     /**
-     * @param UserRepositoryContract $users
+     * @param UserRepository $users
      */
-    public function __construct(UserRepositoryContract $users)
+    public function __construct(UserRepository $users)
     {
         $this->users = $users;
     }

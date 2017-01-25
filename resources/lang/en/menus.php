@@ -18,55 +18,59 @@ return [
             'title' => 'Access Management',
 
             'roles' => [
-                'all' => 'All Roles',
-                'create' => 'Create Role',
-                'edit' => 'Edit Role',
+                'all'        => 'All Roles',
+                'create'     => 'Create Role',
+                'edit'       => 'Edit Role',
                 'management' => 'Role Management',
-                'main' => 'Roles',
+                'main'       => 'Roles',
             ],
 
             'users' => [
-                'all' => 'All Users',
+                'all'             => 'All Users',
                 'change-password' => 'Change Password',
-                'create' => 'Create User',
-                'deactivated' => 'Deactivated Users',
-                'deleted' => 'Deleted Users',
-                'edit' => 'Edit User',
-                'main' => 'Users',
+                'create'          => 'Create User',
+                'deactivated'     => 'Deactivated Users',
+                'deleted'         => 'Deleted Users',
+                'edit'            => 'Edit User',
+                'main'            => 'Users',
+                'view'            => 'View User',
             ],
         ],
 
         'log-viewer' => [
-            'main' => 'Log Viewer',
+            'main'      => 'Log Viewer',
             'dashboard' => 'Dashboard',
-            'logs' => 'Logs',
+            'logs'      => 'Logs',
         ],
 
         'sidebar' => [
             'dashboard' => 'Dashboard',
-            'general' => 'General',
+            'general'   => 'General',
+            'system'    => 'System',
         ],
     ],
 
     'language-picker' => [
         'language' => 'Language',
-        /**
+        /*
          * Add the new language to this array.
          * The key should have the same language code as the folder name.
          * The string should be: 'Language-name-in-your-own-language (Language-name-in-English)'.
          * Be sure to add the new language in alphabetical order.
          */
         'langs' => [
-            'ar' => 'Arabic',
-            'da' => 'Danish',
-            'de' => 'German',
-            'en' => 'English',
-            'es' => 'Spanish',
-            'fr' => 'French',
-            'it' => 'Italian',
-            'pt-BR' => 'Brazilian Portuguese',
-            'sv' => 'Swedish',
-            'th' => 'Thai',
+            'ar'    => 'Arabic',
+            'da'    => 'Danish',
+            'de'    => 'German',
+            'el'    => 'Greek',
+            'en'    => 'English',
+            'es'    => 'Spanish',
+            'fr'    => 'French',
+            'it'    => 'Italian',
+            'nl'    => 'Dutch',
+            'pt_BR' => 'Brazilian Portuguese',
+            'sv'    => 'Swedish',
+            'th'    => 'Thai',
         ],
     ],
 ];

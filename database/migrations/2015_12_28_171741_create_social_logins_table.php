@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateSocialLoginsTable.
+ */
 class CreateSocialLoginsTable extends Migration
 {
     /**
@@ -20,8 +24,7 @@ class CreateSocialLoginsTable extends Migration
             $table->string('provider_id');
             $table->string('token')->nullable();
             $table->string('avatar')->nullable();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +35,6 @@ class CreateSocialLoginsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('social_logins');
+        Schema::dropIfExists('social_logins');
     }
 }

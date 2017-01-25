@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests\Frontend\User;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
 /**
- * Class ChangePasswordRequest
- * @package App\Http\Requests\Frontend\Access
+ * Class ChangePasswordRequest.
  */
-class ChangePasswordRequest extends FormRequest
+class ChangePasswordRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

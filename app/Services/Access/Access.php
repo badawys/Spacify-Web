@@ -3,28 +3,10 @@
 namespace App\Services\Access;
 
 /**
- * Class Access
- * @package App\Services\Access
+ * Class Access.
  */
 class Access
 {
-    /**
-     * Laravel application
-     *
-     * @var \Illuminate\Foundation\Application
-     */
-    public $app;
-
-    /**
-     * Create a new confide instance.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
-    public function __construct($app)
-    {
-        $this->app = $app;
-    }
-
     /**
      * Get the currently authenticated user or null.
      */
@@ -34,7 +16,8 @@ class Access
     }
 
     /**
-     * Return if the current session user is a guest or not
+     * Return if the current session user is a guest or not.
+     *
      * @return mixed
      */
     public function guest()
@@ -51,7 +34,8 @@ class Access
     }
 
     /**
-     * Get the currently authenticated user's id
+     * Get the currently authenticated user's id.
+     *
      * @return mixed
      */
     public function id()
@@ -61,6 +45,7 @@ class Access
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function loginUsingId($id)
@@ -69,9 +54,10 @@ class Access
     }
 
     /**
-     * Checks if the current user has a Role by its name or id
+     * Checks if the current user has a Role by its name or id.
      *
-     * @param  string $role Role name.
+     * @param string $role Role name.
+     *
      * @return bool
      */
     public function hasRole($role)
@@ -84,19 +70,16 @@ class Access
     }
 
     /**
-     * Checks if the user has either one or more, or all of an array of roles
+     * Checks if the user has either one or more, or all of an array of roles.
+     *
      * @param  $roles
-     * @param  bool     $needsAll
+     * @param bool $needsAll
+     *
      * @return bool
      */
     public function hasRoles($roles, $needsAll = false)
     {
         if ($user = $this->user()) {
-            //If not an array, make a one item array
-            if (!is_array($roles)) {
-                $roles = [$roles];
-            }
-
             return $user->hasRoles($roles, $needsAll);
         }
 
@@ -104,9 +87,10 @@ class Access
     }
 
     /**
-     * Check if the current user has a permission by its name or id
+     * Check if the current user has a permission by its name or id.
      *
-     * @param  string $permission Permission name or id.
+     * @param string $permission Permission name or id.
+     *
      * @return bool
      */
     public function allow($permission)
@@ -119,19 +103,16 @@ class Access
     }
 
     /**
-     * Check an array of permissions and whether or not all are required to continue
+     * Check an array of permissions and whether or not all are required to continue.
+     *
      * @param  $permissions
      * @param  $needsAll
+     *
      * @return bool
      */
     public function allowMultiple($permissions, $needsAll = false)
     {
         if ($user = $this->user()) {
-            //If not an array, make a one item array
-            if (!is_array($permissions)) {
-                $permissions = [$permissions];
-            }
-
             return $user->allowMultiple($permissions, $needsAll);
         }
 
@@ -140,6 +121,7 @@ class Access
 
     /**
      * @param  $permission
+     *
      * @return bool
      */
     public function hasPermission($permission)
@@ -150,6 +132,7 @@ class Access
     /**
      * @param  $permissions
      * @param  $needsAll
+     *
      * @return bool
      */
     public function hasPermissions($permissions, $needsAll = false)

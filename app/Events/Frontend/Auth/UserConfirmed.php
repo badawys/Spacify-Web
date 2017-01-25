@@ -6,15 +6,14 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class UserConfirmed
- * @package App\Events\Frontend\Auth
+ * Class UserConfirmed.
  */
 class UserConfirmed extends Event
 {
     use SerializesModels;
 
     /**
-     * @var $user
+     * @var
      */
     public $user;
 

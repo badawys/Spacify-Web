@@ -14,20 +14,22 @@ return [
     */
 
     'general' => [
-        'home' => 'Hjem',
+        'home'   => 'Hjem',
         'logout' => 'Log ud',
     ],
 
     'frontend' => [
         'dashboard' => 'Betjeningspanel',
-        'login' => 'Log ind',
-        'macros' => 'Makroer',
-        'register' => 'Opret',
+        'login'     => 'Log ind',
+        'macros'    => 'Makroer',
+        'register'  => 'Opret',
 
         'user' => [
-            'administration' => 'Administration',
+            'account'         => 'My Account',
+            'administration'  => 'Administration',
             'change_password' => 'Skift adgangskode',
-            'my_information' => 'Min information',
+            'my_information'  => 'Min information',
+            'profile'         => 'Profile',
         ],
     ],
 ];

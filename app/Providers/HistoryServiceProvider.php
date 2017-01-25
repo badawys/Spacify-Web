@@ -1,4 +1,6 @@
-<?php namespace App\Providers;
+<?php
+
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Backend\History\HistoryContract;
@@ -6,12 +8,10 @@ use App\Repositories\Backend\History\EloquentHistoryRepository;
 use App\Repositories\Backend\History\Facades\History as HistoryFacade;
 
 /**
- * Class HistoryServiceProvider
- * @package App\Providers
+ * Class HistoryServiceProvider.
  */
 class HistoryServiceProvider extends ServiceProvider
 {
-
     /**
      * Register the service provider.
      *
@@ -24,9 +24,6 @@ class HistoryServiceProvider extends ServiceProvider
         $this->registerFacade();
     }
 
-    /**
-     *
-     */
     public function registerFacade()
     {
         $this->app->booting(function () {
