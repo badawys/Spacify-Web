@@ -149,6 +149,7 @@ return [
                     'password'                => 'Password',
                     'password_confirmation'   => 'Password Confirmation',
                     'send_confirmation_email' => 'Send Confirmation E-mail',
+                    'photo'                   => 'User Photo',
                 ],
             ],
         ],

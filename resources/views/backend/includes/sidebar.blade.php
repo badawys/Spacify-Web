@@ -67,6 +67,20 @@
                 </li>
             @endauth
 
+            <li class="{{ Active::pattern('admin/spaces*') }}">
+                <a href="{{ route('admin.spaces.index') }}">
+                    <i class="fa  fa-map-marker"></i>
+                    <span>{{ trans('labels.backend.spaces.management') }}</span>
+                </a>
+            </li>
+
+            <li class="{{ Active::pattern('admin/posts*') }}">
+                <a href="{{ route('admin.posts.index') }}">
+                    <i class="fa fa-align-justify"></i>
+                    <span>{{ trans('labels.backend.posts.management') }}</span>
+                </a>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             <li class="{{ Active::pattern('admin/log-viewer*') }} treeview">

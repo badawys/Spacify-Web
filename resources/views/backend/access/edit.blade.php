@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    {{ Form::model($user, ['route' => ['admin.access.user.update', $user], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH']) }}
+    {{ Form::model($user, ['route' => ['admin.access.user.update', $user], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'files' => true]) }}
 
         <div class="box box-success">
             <div class="box-header with-border">
@@ -35,6 +35,14 @@
 
                     <div class="col-lg-10">
                         {{ Form::text('email', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.users.email')]) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+                <div class="form-group">
+                    {{ Form::label('photo', trans('validation.attributes.backend.access.users.photo'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::file('photo') }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 

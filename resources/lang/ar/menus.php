@@ -60,17 +60,7 @@ return [
          */
         'langs' => [
             'ar'    => 'العربية (Arabic)',
-            'da'    => 'الدنماركية (Danish)',
-            'de'    => 'الألمانية (German)',
-            'el'    => '(Greek)',
             'en'    => 'الإنجليزية (English)',
-            'es'    => 'الأسبانية (Spanish)',
-            'fr'    => 'الفرنسية (French)',
-            'it'    => 'الإيطالية (Italian)',
-            'nl'    => 'هولندي (Dutch)',
-            'pt_BR' => 'البرازيلية البرتغالية (Brazilian Portuguese)',
-            'sv'    => 'السويسرية (Swedish)',
-            'th'    => 'Thai',
         ],
     ],
 ];

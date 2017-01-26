@@ -59,18 +59,8 @@ return [
          * Be sure to add the new language in alphabetical order.
          */
         'langs' => [
-            'ar'    => 'Arabic',
-            'da'    => 'Danish',
-            'de'    => 'German',
-            'el'    => 'Greek',
+            'ar'    => 'Arabic (العربية)',
             'en'    => 'English',
-            'es'    => 'Spanish',
-            'fr'    => 'French',
-            'it'    => 'Italian',
-            'nl'    => 'Dutch',
-            'pt_BR' => 'Brazilian Portuguese',
-            'sv'    => 'Swedish',
-            'th'    => 'Thai',
         ],
     ],
 ];

@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Models\Access\User\Traits\Attribute;
+
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserAttribute.
@@ -65,6 +66,9 @@ trait UserAttribute
         if (! $size) {
             $size = config('gravatar.default.size');
         }
+
+        if ($this->photo)
+            return Storage::url($this->photo);
 
         return gravatar()->get($this->email, ['size' => $size]);
     }

@@ -147,6 +147,7 @@ return [
                     'password'                => 'كلمة المرور',
                     'password_confirmation'   => 'تأكيد كلمة المرور',
                     'send_confirmation_email' => 'إرسال رسالة التفعيل',
+                    'photo'                   => 'صورة المستخدم',
                 ],
             ],
         ],
