@@ -101,7 +101,7 @@ class UserController extends Controller
             'photo' => $photo ?? $request->user()->photo,
         ]);
 
-        if($response) {
+        if ($response) {
             $result = [];
             $result['name'] = $request->user()->name;
             $result['email'] = $request->user()->email;
