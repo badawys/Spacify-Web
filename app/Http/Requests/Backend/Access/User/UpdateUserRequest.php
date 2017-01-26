@@ -29,6 +29,7 @@ class UpdateUserRequest extends Request
         return [
             'email' => 'required|email',
             'name'  => 'required',
+            'photo' =>  'sometimes|required|image',
         ];
     }
 }

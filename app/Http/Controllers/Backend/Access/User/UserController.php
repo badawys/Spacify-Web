@@ -102,7 +102,16 @@ class UserController extends Controller
      */
     public function update(User $user, UpdateUserRequest $request)
     {
-        $this->users->update($user, ['data' => $request->except('assignees_roles'), 'roles' => $request->only('assignees_roles')]);
+        $data = $request->except('assignees_roles');
+        $roles = $request->only('assignees_roles');
+        $data['photo'] = $user->photo;
+
+        if($request->photo) {
+            $photo = $request->file('photo')->store('profile_pic');
+            $data['photo'] = $photo;
+        }
+
+        $this->users->update($user, ['data' => $data, 'roles' => $roles]);
 
         return redirect()->route('admin.access.user.index')->withFlashSuccess(trans('alerts.backend.users.updated'));
     }
