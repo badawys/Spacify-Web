@@ -97,6 +97,14 @@ return [
                 'view' => 'View User',
             ],
         ],
+
+        'spaces' => [
+            'management'    => 'Spaces Management'
+        ],
+
+        'posts' => [
+            'management'    => 'Posts Management'
+        ],
     ],
 
     'frontend' => [

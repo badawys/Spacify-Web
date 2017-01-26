@@ -97,6 +97,15 @@ return [
                 'view' => 'View User',
             ],
         ],
+
+        'spaces' => [
+            'management'    => 'إدارة المساحات'
+        ],
+
+        'posts' => [
+            'management'    => 'إدارة المنشورات'
+        ],
+
     ],
 
     'frontend' => [
