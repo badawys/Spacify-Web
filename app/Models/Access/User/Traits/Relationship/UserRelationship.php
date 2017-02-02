@@ -3,6 +3,7 @@
 namespace App\Models\Access\User\Traits\Relationship;
 
 use App\Models\Access\User\SocialLogin;
+use App\Models\Space\Space;
 
 /**
  * Class UserRelationship.
@@ -25,5 +26,13 @@ trait UserRelationship
     public function providers()
     {
         return $this->hasMany(SocialLogin::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function spaces()
+    {
+        return $this->hasMany(Space::class, 'user_id', 'id');
     }
 }
