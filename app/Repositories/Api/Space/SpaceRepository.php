@@ -16,6 +16,14 @@ class SpaceRepository extends Repository
      */
     const MODEL = Space::class;
 
+    /**
+     * @param $lag
+     * @param $lat
+     */
+    public function findNearby ($lag, $lat) {
+        //TODO
+    }
+
 
     public function createSpace(array $data) {
         //TODO

@@ -24,6 +24,14 @@ class SpaceController extends Controller
     }
 
     /**
+     * @param $lag
+     * @param $lat
+     */
+    public function findNearby ($lag, $lat) {
+        //TODO
+    }
+
+    /**
      * @param $id
      */
     public function getSpace($id) {

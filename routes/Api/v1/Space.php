@@ -22,6 +22,7 @@ $api->group([
      * Space routes
      */
 
+    $api->get('/nearby/{lag}/{lat}', 'SpaceController@findNearby');
     $api->get('/{id}/{args?}', 'SpaceController@getSpace');
     $api->get('/my', 'SpaceController@getUserSpaces');
     $api->get('/joined', 'SpaceController@getJoinedSpaces');

@@ -2,6 +2,8 @@
 
 namespace App\Models\Space;
 
+use App\Models\Space\Traits\Relationship\SpaceRelationship;
+use App\Models\Space\Traits\Scope\SpaceScope;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Space extends Model
 {
+    use SpaceRelationship, SpaceScope;
 
     /**
      * The database table used by the model.
