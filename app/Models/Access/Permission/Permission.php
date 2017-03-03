@@ -2,6 +2,7 @@
 
 namespace App\Models\Access\Permission;
 
+use App\Models\Access\Permission\Traits\Attribute\PermissionAttribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Access\Permission\Traits\Relationship\PermissionRelationship;
 
@@ -10,7 +11,8 @@ use App\Models\Access\Permission\Traits\Relationship\PermissionRelationship;
  */
 class Permission extends Model
 {
-    use PermissionRelationship;
+    use PermissionRelationship,
+        PermissionAttribute;
 
     /**
      * The database table used by the model.

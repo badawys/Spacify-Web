@@ -25,6 +25,14 @@ return [
                 'main'       => 'Roles',
             ],
 
+            'permissions' => [
+                'all'        => 'All Permissions',
+                'create'     => 'Create Permission',
+                'edit'       => 'Edit Permission',
+                'management' => 'Permission Management',
+                'main'       => 'Permissions',
+            ],
+
             'users' => [
                 'all'             => 'All Users',
                 'change-password' => 'Change Password',

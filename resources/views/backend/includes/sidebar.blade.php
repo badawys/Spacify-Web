@@ -15,15 +15,15 @@
         </div><!--user-panel-->
 
         <!-- search form (Optional) -->
-        {{ Form::open(['route' => 'admin.search.index', 'method' => 'get', 'class' => 'sidebar-form']) }}
-            <div class="input-group">
-                {{ Form::text('q', Request::get('q'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('strings.backend.general.search_placeholder')]) }}
+        {{--{{ Form::open(['route' => 'admin.search.index', 'method' => 'get', 'class' => 'sidebar-form']) }}--}}
+            {{--<div class="input-group">--}}
+                {{--{{ Form::text('q', Request::get('q'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('strings.backend.general.search_placeholder')]) }}--}}
 
-                  <span class="input-group-btn">
-                    <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                  </span><!--input-group-btn-->
-            </div><!--input-group-->
-        {{ Form::close() }}
+                  {{--<span class="input-group-btn">--}}
+                    {{--<button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>--}}
+                  {{--</span><!--input-group-btn-->--}}
+            {{--</div><!--input-group-->--}}
+        {{--{{ Form::close() }}--}}
         <!-- /.search form -->
 
         <!-- Sidebar Menu -->
@@ -62,6 +62,15 @@
                                     <span>{{ trans('labels.backend.access.roles.management') }}</span>
                                 </a>
                             </li>
+                        @endauth
+
+                        @permission('manage-permissions')
+                        <li class="{{ Active::pattern('admin/access/permission*') }}">
+                            <a href="{{ route('admin.access.permission.index') }}">
+                                <i class="fa fa-circle-o"></i>
+                                <span>{{ trans('labels.backend.access.permissions.management') }}</span>
+                            </a>
+                        </li>
                         @endauth
                     </ul>
                 </li>

@@ -121,9 +121,10 @@ return [
                 'permissions' => [
                     'associated_roles' => 'Associated Roles',
                     'dependencies'     => 'Dependencies',
-                    'display_name'     => 'Display Name',
+                    'display_name'     => 'Description',
                     'group'            => 'Group',
                     'group_sort'       => 'Group Sort',
+                    'sort'             =>  'Sort',
 
                     'groups' => [
                         'name' => 'Group Name',

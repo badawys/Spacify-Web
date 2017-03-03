@@ -47,6 +47,19 @@ return [
                 ],
             ],
 
+            'permissions' => [
+                'create'     => 'Create Permission',
+                'edit'       => 'Edit Permission',
+                'management' => 'Permission Management',
+
+                'table' => [
+                    'permission' => 'Permission',
+                    'display_name' => 'Description',
+                    'sort' => 'Sort'
+
+                ],
+            ],
+
             'users' => [
                 'active'              => 'Active Users',
                 'all_permissions'     => 'All Permissions',
