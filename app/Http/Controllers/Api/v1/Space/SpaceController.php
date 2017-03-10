@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\Space;
 
+use App\Http\Requests\Api\v1\Space\CreateSpaceRequest;
 use App\Http\Requests\Request;
 use App\Repositories\Api\Space\SpaceRepository;
 use App\Http\Controllers\Controller;
@@ -53,10 +54,10 @@ class SpaceController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CreateSpaceRequest $request
      */
-    public function createSpace(Request $request) {
-        //TODO
+    public function createSpace(CreateSpaceRequest $request) {
+        return $this->spaces->create($request->all());
     }
 
     /**
