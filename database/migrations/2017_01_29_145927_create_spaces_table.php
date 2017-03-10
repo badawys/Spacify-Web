@@ -20,8 +20,8 @@ class CreateSpacesTable extends Migration
             $table->double('lng', 10, 6);
             $table->double('lat', 10, 6);
             $table->json('data')->nullable();
-            $table->string('photo');
-            $table->string('description');
+            $table->string('photo')->default('spaces/default.jpg');
+            $table->string('description')->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
