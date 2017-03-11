@@ -23,12 +23,12 @@ $api->group([
      */
 
     $api->get('/nearby/{lag}/{lat}', 'SpaceController@findNearby');
-    $api->get('/{id}/{args?}', 'SpaceController@getSpace');
     $api->get('/my', 'SpaceController@getUserSpaces');
     $api->get('/joined', 'SpaceController@getJoinedSpaces');
     $api->post('/create', 'SpaceController@createSpace');
-    $api->patch('/update/{id}', 'SpaceController@updateSpace');
-    $api->delete('/update/{id}', 'SpaceController@deleteSpace');
+    $api->patch('/update', 'SpaceController@updateSpace');
+    $api->delete('/delete/{id}', 'SpaceController@deleteSpace');
+    $api->get('/{id}', 'SpaceController@getSpace');
 
 });
 

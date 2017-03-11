@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Space;
 
 use App\Http\Requests\Api\v1\Space\CreateSpaceRequest;
-use App\Http\Requests\Request;
+use App\Http\Requests\Api\v1\Space\UpdateSpaceRequest;
 use App\Repositories\Api\Space\SpaceRepository;
 use App\Http\Controllers\Controller;
 
@@ -30,21 +30,22 @@ class SpaceController extends Controller
      * @return mixed
      */
     public function findNearby ($lag, $lat) {
-        return $this->spaces->findNearby($lag, $lat);
+        return $this->spaces->findNearby($lag, $lat)->paginate(15);
     }
 
     /**
      * @param $id
+     * @return mixed
      */
     public function getSpace($id) {
-        //TODO
+        return $this->spaces->find($id);
     }
 
     /**
      *
      */
     public function getUserSpaces() {
-        //TODO
+        return $this->spaces->getUserSpaces()->paginate(15);
     }
 
     /**
@@ -62,18 +63,19 @@ class SpaceController extends Controller
     }
 
     /**
-     * @param $id
+     * @param UpdateSpaceRequest $request
+     * @return mixed
      */
-    public function updateSpace($id) {
-        //TODO
+    public function updateSpace(UpdateSpaceRequest $request) {
+        return $this->spaces->updateSpace($request->all());
     }
 
     /**
      * @param $id
+     * @return \Illuminate\Http\Response
      */
     public function deleteSpace($id) {
-        //TODO
+        return $this->spaces->deleteSpace($id);
     }
-
 
 }

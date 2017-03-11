@@ -3,10 +3,13 @@
 namespace App\Repositories\Api\Space;
 
 use App\Exceptions\GeneralException;
+use App\Models\Access\User\User;
 use App\Models\Space\Space;
 use App\Repositories\Repository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -23,7 +26,7 @@ class SpaceRepository extends Repository
      */
     public function findNearby ($lag, $lat) {
        //nearby is a method in SpaceScope
-        return Space::nearby($lag, $lat)->paginate(15);
+        return Space::nearby($lag, $lat);
     }
 
 
@@ -53,24 +56,43 @@ class SpaceRepository extends Repository
     }
 
     /**
-     * @param Model $model
      * @param array $input
-     * @return bool
+     * @return mixed
      */
-    public function update(Model $model, array $input)
+    public function updateSpace(array $input)
     {
-        $updated = parent::update($model, $input);
-        return $updated;
+        $space = $this->find($input['id']);
+
+        DB::transaction(function () use ($space, $input) {
+            parent::update($space, $input);
+        });
+
+        return $space;
     }
 
     /**
-     * @param Model $model
-     * @return bool|null
+     * @param $id
+     * @return Response
      */
-    public function delete(Model $model)
+    public function deleteSpace($id)
     {
-        $deleted = parent::delete($model);
-        return $deleted;
+        $space = $this->find($id);
+
+        if ($space) {
+            DB::transaction(function () use ($space) {
+                parent::delete($space);
+            });
+            return response('',204);
+        }
+
+        throw new NotFoundHttpException('Space not found!');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSpaces () {
+        return User::find(auth()->id())->spaces();
     }
 
 }
