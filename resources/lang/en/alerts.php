@@ -20,6 +20,12 @@ return [
             'updated' => 'The role was successfully updated.',
         ],
 
+        'permissions' => [
+            'created' => 'The permission was successfully created.',
+            'deleted' => 'The permission was successfully deleted.',
+            'updated' => 'The permission was successfully updated.',
+        ],
+
         'users' => [
             'confirmation_email'  => 'A new confirmation e-mail has been sent to the address on file.',
             'created'             => 'The user was successfully created.',
