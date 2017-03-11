@@ -22,9 +22,8 @@ class SpaceRepository extends Repository
      * @return mixed
      */
     public function findNearby ($lag, $lat) {
-        $space = self::MODEL;
-        //nearby is a method in SpaceScope
-        return $space->nearby($lag, $lat);
+       //nearby is a method in SpaceScope
+        return Space::nearby($lag, $lat)->paginate(15);
     }
 
 
@@ -42,7 +41,7 @@ class SpaceRepository extends Repository
         $space->lat = $input['lat'];
         if (isset($input['photo']))
             $space->photo = $input['photo'];
-        $space->user_id = $input['user_id'];
+        $space->user_id = auth()->id();
         if(isset($input['description']))
             $space->description = $input['description'];
 

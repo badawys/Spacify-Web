@@ -30,7 +30,6 @@ class CreateSpaceRequest extends FormRequest
             'type' => 'required',
             'lng' => 'required',
             'lat' => 'required',
-            'user_id' => 'required',
         ];
     }
 

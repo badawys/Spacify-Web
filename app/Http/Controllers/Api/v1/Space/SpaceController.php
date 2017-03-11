@@ -27,9 +27,10 @@ class SpaceController extends Controller
     /**
      * @param $lag
      * @param $lat
+     * @return mixed
      */
     public function findNearby ($lag, $lat) {
-        //TODO
+        return $this->spaces->findNearby($lag, $lat);
     }
 
     /**
