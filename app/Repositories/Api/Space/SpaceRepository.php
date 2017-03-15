@@ -2,11 +2,10 @@
 
 namespace App\Repositories\Api\Space;
 
-use App\Exceptions\GeneralException;
+use App\Http\Requests\Api\v1\Space\CreateSpaceRequest;
 use App\Models\Access\User\User;
 use App\Models\Space\Space;
 use App\Repositories\Repository;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,19 +30,24 @@ class SpaceRepository extends Repository
 
 
     /**
-     * @param array $input
-     * @throws GeneralException
+     * @param CreateSpaceRequest $request
+     * @return mixed
      */
-    public function create(array $input)
+    public function create(CreateSpaceRequest $request)
     {
+        $input = $request->all();
+
         $space = self::MODEL;
         $space = new $space();
         $space->name = $input['name'];
         $space->type = $input['type'];
         $space->lng = $input['lng'];
         $space->lat = $input['lat'];
-        if (isset($input['photo']))
-            $space->photo = $input['photo'];
+        $space->photo = config('defaults.space_pic');
+        if($request->photo) {
+            $photo = $request->file('photo')->store('space_pic');
+            $space->photo = $photo;
+        }
         $space->user_id = auth()->id();
         if(isset($input['description']))
             $space->description = $input['description'];
