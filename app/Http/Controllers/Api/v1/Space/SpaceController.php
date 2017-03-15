@@ -57,9 +57,10 @@ class SpaceController extends Controller
 
     /**
      * @param CreateSpaceRequest $request
+     * @return mixed
      */
     public function createSpace(CreateSpaceRequest $request) {
-        return $this->spaces->create($request->all());
+        return $this->spaces->create($request);
     }
 
     /**

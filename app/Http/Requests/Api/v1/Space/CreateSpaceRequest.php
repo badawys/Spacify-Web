@@ -30,6 +30,7 @@ class CreateSpaceRequest extends FormRequest
             'type' => 'required',
             'lng' => 'required',
             'lat' => 'required',
+            'photo'=> 'sometimes|required|image',
         ];
     }
 

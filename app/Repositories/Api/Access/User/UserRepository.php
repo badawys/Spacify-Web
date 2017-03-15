@@ -84,6 +84,7 @@ class UserRepository extends Repository
         $user = new $user();
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->photo = config('defaults.user_pic');
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
         $user->status = 1;
         $user->password = $provider ? null : bcrypt($data['password']);
