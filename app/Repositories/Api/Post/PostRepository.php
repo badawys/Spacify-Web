@@ -40,7 +40,7 @@ class PostRepository extends Repository
      * @param $id
      * @return Response
      */
-    public function deleteSpace($id)
+    public function deletePost($id)
     {
         $post = $this->find($id);
 
@@ -53,5 +53,4 @@ class PostRepository extends Repository
 
         throw new NotFoundHttpException('post not found!');
     }
-
 }
