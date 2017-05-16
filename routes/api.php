@@ -59,5 +59,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\v1', 'middleware' 
 
     require(__DIR__ . '/Api/v1/User.php');
     require(__DIR__ . '/Api/v1/Space.php');
+    require(__DIR__ . '/Api/v1/Post.php');
 
 });

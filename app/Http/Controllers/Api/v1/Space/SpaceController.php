@@ -46,7 +46,7 @@ class SpaceController extends Controller
      * @return mixed
      */
     public function getPosts($id) {
-        return $this->spaces->find($id)->posts->paginate(15);
+        return $this->spaces->getSpacePosts($id)->paginate(15);
     }
 
     /**

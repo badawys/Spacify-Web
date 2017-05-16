@@ -28,7 +28,7 @@ trait SpaceRelationship
      */
     public function posts()
     {
-        return $this->hasMany(Post::class, 'post_id');
+        return $this->hasMany(Post::class);
     }
 
 }
