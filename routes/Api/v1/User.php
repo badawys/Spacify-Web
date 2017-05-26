@@ -13,7 +13,6 @@ $api = app('Dingo\Api\Routing\Router');
 */
 
 $api->group(['namespace' => 'User'], function ($api) {
-
 	/**
 	 * User routes
 	 */
@@ -27,5 +26,6 @@ $api->group(['namespace' => 'User'], function ($api) {
 	// Profile Rputes
     $api->get('/profile/{args?}', 'UserController@getProfile')->middleware('auth:api');
     $api->patch('/profile', 'UserController@updateProfile')->middleware('auth:api');
-});
+    }
+);
 

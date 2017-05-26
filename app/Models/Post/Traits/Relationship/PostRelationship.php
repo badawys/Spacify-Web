@@ -1,11 +1,12 @@
 <?php
-namespace App\Models\Space\Traits\Relationship;
+
+namespace App\Models\Post\Traits\Relationship;
 
 use App\Models\Access\User\User;
-use App\Models\Post\Post;
-use App\Models\Space\SpaceType;
+use App\Models\Post\PostType;
+use App\Models\Space\Space;
 
-trait SpaceRelationship
+trait PostRelationship
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -20,15 +21,14 @@ trait SpaceRelationship
      */
     public function type()
     {
-        return $this->hasOne(SpaceType::class, 'id', 'type');
+        return $this->hasOne(PostType::class, 'id', 'type');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function posts()
+    public function space()
     {
-        return $this->hasMany(Post::class, 'post_id');
+        return $this->hasOne(Space::class, 'id', 'space_id');
     }
-
 }
