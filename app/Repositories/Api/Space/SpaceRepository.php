@@ -105,7 +105,7 @@ class SpaceRepository extends Repository
     public function getSpacePosts ($id) {
         return Space::find($id)->posts()->with(['user'  => function ($query) {
             $query->select('id', 'name', 'photo');
-        }]);
+        }])->orderBy('id', 'desc');
     }
 
 }
