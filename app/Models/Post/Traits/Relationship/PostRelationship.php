@@ -31,4 +31,9 @@ trait PostRelationship
     {
         return $this->hasOne(Space::class, 'id', 'space_id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

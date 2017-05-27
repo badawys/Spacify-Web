@@ -103,7 +103,9 @@ class SpaceRepository extends Repository
      * @return mixed
      */
     public function getSpacePosts ($id) {
-        return Space::find($id)->posts();
+        return Space::find($id)->posts()->with(['user'  => function ($query) {
+            $query->select('id', 'name', 'photo');
+        }]);
     }
 
 }
