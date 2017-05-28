@@ -14,6 +14,7 @@ class FeedController extends Controller
             ->with(['space'  => function ($query) {
                 $query->select('id', 'name');
             }])
+            ->whereIn('type', [1,2])
             ->orderBy('id', 'desc')
             ->paginate(15);
     }
