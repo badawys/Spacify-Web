@@ -21,24 +21,28 @@ trait SpaceScope {
      */
     public function scopeNearby($subQuery, $lng, $lat, $radius = 500, $unit = "m")
     {
-        $unit = ($unit === "m") ? 6378100 : 6378.10;
-        $lat = (float) $lat;
-        $lng = (float) $lng;
-        $radius = (double) $radius;
-        //Generating Query
-        $item_distance_query = "*,
-                            ($unit * ACOS(COS(RADIANS($lat))
-                                * COS(RADIANS(lat))
-                                * COS(RADIANS($lng) - RADIANS(lng))
-                                + SIN(RADIANS($lat))
-                                * SIN(RADIANS(lat)))) AS distance";
+//        $unit = ($unit === "m") ? 6378100 : 6378.10;
+//        $lat = (float) $lat;
+//        $lng = (float) $lng;
+//        $radius = (double) $radius;
+//        //Generating Query
+//        $item_distance_query = "*,
+//                            ($unit * ACOS(COS(RADIANS($lat))
+//                                * COS(RADIANS(lat))
+//                                * COS(RADIANS($lng) - RADIANS(lng))
+//                                + SIN(RADIANS($lat))
+//                                * SIN(RADIANS(lat)))) AS distance";
+//
+//        $subQuery->getQuery()->selectRaw($item_distance_query,
+//            [$lat, $lng, $lat]
+//        );
+//        $rawQuery = self::getSql($subQuery);
+//        return DB::table(DB::raw("(" . $rawQuery . ") as item"))
+//            ->where('distance', '<', $radius)
+//            ->whereIn('type', [1,2]);
 
-        $subQuery->getQuery()->selectRaw($item_distance_query,
-            [$lat, $lng, $lat]
-        );
-        $rawQuery = self::getSql($subQuery);
-        return DB::table(DB::raw("(" . $rawQuery . ") as item"))
-            ->where('distance', '<', $radius);
+        return DB::table('spaces')
+            ->whereIn('type', [1,2]);
     }
 
     /**
